@@ -26,12 +26,12 @@ class Phonebook extends Model
         'mailing_address_details',
     ];
 
-    public function phonebook_emails()
+    public function emails()
     {
         return $this->hasMany(PhonebookEmail::class);
     }
 
-    public function phonebook_numbers()
+    public function numbers()
     {
         return $this->hasMany(PhonebookNumber::class);
     }

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\ValueObjects\PhoneNumber;
+use App\ValueObjects\PhoneNumber as PhoneNumberValueObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use Casts\PhoneNumber as PhoneNumberCast;
+use App\Casts\PhoneNumber as PhoneNumberCast;
 use App\Models\Phonebook;
 
 class PhonebookNumber extends Model

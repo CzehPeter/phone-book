@@ -1,12 +1,13 @@
 <?php
 
-namespace Casts;
+namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use App\ValueObjects\PhoneNumber as PhoneNumberValueObject;
 
 /**
- *
+ * Casts phone number to PhoneNumberValueObject
+ * ----------------------------------------------------
  */
 class PhoneNumber implements CastsAttributes
 {

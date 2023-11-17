@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PhonebookController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,22 +17,26 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect('/phonebook');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::prefix('phonebook')->group(function () {
+    /** Table view */
+    Route::get('/', [PhonebookController::class, 'index'])->name('phonebook.index');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    /** Create phonebook row */
+    Route::get('/create', [PhonebookController::class, 'create'])
+         ->middleware('phoneNumberFormmat')
+         ->name('phonebook.create');
+
+    //Route::post('/', [PhonebookController::class, 'store'])->name('phonebook.store');
+    //Route::get('/{id}/edit', [PhonebookController::class, 'edit'])->name('phonebook.edit');
+    //Route::post('/{id}', [PhonebookController::class, 'update'])->name('phonebook.update');
+    //Route::delete('/{id}', [PhonebookController::class, 'destroy'])->name('phonebook.destroy');
+
+    /** Load phonebook content */
+    Route::post('/load', [PhonebookController::class, 'load'])->name('phonebook.load');
 });
 
-require __DIR__.'/auth.php';
+
+
